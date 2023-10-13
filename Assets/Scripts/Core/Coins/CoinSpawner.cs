@@ -12,13 +12,13 @@ public class CoinSpawner : NetworkBehaviour{
     [SerializeField] private LayerMask layerMask;
 
     private float coinRadius;
-    private Collider2D[] coinBuffer = new Collider2D[1];
+    private readonly Collider2D[] coinBuffer = new Collider2D[1];
 
     override public void OnNetworkSpawn(){
         if (!IsServer) return;
 
         coinRadius = coinPrefab.GetComponent<CircleCollider2D>().radius;
-        for (int i = 0; i < maxCoins; i++){
+        for (var i = 0; i < maxCoins; i++){
             SpawnCoin();
         }
     }

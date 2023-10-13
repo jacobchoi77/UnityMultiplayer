@@ -5,10 +5,11 @@ using UnityEngine;
 public class Health : NetworkBehaviour{
     [field: SerializeField] public int maxHealth{ get; private set; } = 100;
 
-    public NetworkVariable<int> CurrentHealth = new NetworkVariable<int>();
+    public NetworkVariable<int> CurrentHealth{ get; } = new NetworkVariable<int>();
+
     private bool isDead;
 
-    public Action<Health> OnDie;
+    public Action<Health> OnDie{ get; set; }
 
     override public void OnNetworkSpawn(){
         if (!IsServer) return;

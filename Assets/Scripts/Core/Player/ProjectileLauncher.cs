@@ -3,18 +3,23 @@ using UnityEngine;
 
 public class ProjectileLauncher : NetworkBehaviour{
 
-    [Header("References")] [SerializeField] private InputReader inputReader;
+    [Header("References")]
+    [SerializeField] private InputReader inputReader;
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private GameObject serverProjectilePrefab;
     [SerializeField] private GameObject clientProjectilePrefab;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private CoinWallet coinWallet;
 
-    [Header("Settings")] [SerializeField] private float projectileSpeed;
+    [Header("Settings")]
+    [SerializeField] private float projectileSpeed;
     [SerializeField] private float fireRate;
     [SerializeField] private float muzzleFlashDuration;
+    [SerializeField] private int costToFire;
+
     private bool shouldFire;
-    private float previousFireTime;
+    private float timer;
     private float muzzleFlashTimer;
 
     override public void OnNetworkSpawn(){
@@ -28,6 +33,7 @@ public class ProjectileLauncher : NetworkBehaviour{
 
     override public void OnNetworkDespawn(){
         if (!IsOwner) return;
+        inputReader.PrimaryFireEvent -= HandlePrimaryFire;
     }
 
     private void Update(){
@@ -38,15 +44,22 @@ public class ProjectileLauncher : NetworkBehaviour{
             }
         }
         if (!IsOwner) return;
+        if (timer > 0)
+            timer -= Time.deltaTime;
+        if (coinWallet.totalCoins.Value < costToFire) return;
         if (!shouldFire) return;
-        if (Time.time < 1 / fireRate + previousFireTime) return;
-        PrimaryFireServerRpc(projectileSpawnPoint.position, projectileSpawnPoint.up);
-        SpawnDummyProjectile(projectileSpawnPoint.position, projectileSpawnPoint.up);
-        previousFireTime = Time.time;
+        if (timer > 0) return;
+        var spawnPos = projectileSpawnPoint.position;
+        var direction = projectileSpawnPoint.up;
+        PrimaryFireServerRpc(spawnPos, direction);
+        SpawnDummyProjectile(spawnPos, direction);
+        timer = 1 / fireRate;
     }
 
     [ServerRpc]
     private void PrimaryFireServerRpc(Vector3 spawnPos, Vector3 direction){
+        if (coinWallet.totalCoins.Value < costToFire) return;
+        coinWallet.SpendCoins(costToFire);
         var projectileInstance = Instantiate(serverProjectilePrefab, spawnPos, Quaternion.identity);
         projectileInstance.transform.up = direction;
         Physics2D.IgnoreCollision(playerCollider, projectileInstance.GetComponent<Collider2D>());

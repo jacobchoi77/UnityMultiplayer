@@ -45,14 +45,19 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.0f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Networking\Client\ClientSingleton.cs" />
      <Compile Include="Assets\Scripts\ConnectionButtons.cs" />
      <Compile Include="Assets\Scripts\TestScript.cs" />
+     <Compile Include="Assets\Scripts\Networking\Client\ClientGameManager.cs" />
+     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Utils\ClientNetworkTransform.cs" />
      <Compile Include="Assets\Scripts\Core\Coins\CoinSpawner.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\DealDamageOnContact.cs" />
      <Compile Include="Assets\Scripts\Utils\DestroySelfOnContact.cs" />
      <Compile Include="Assets\Scripts\Core\Player\ProjectileLauncher.cs" />
      <Compile Include="Assets\Scripts\Utils\Lifetime.cs" />
+     <Compile Include="Assets\Scripts\Networking\ApplicationController.cs" />
+     <Compile Include="Assets\Scripts\Utils\SpawnOnDestroy.cs" />
      <Compile Include="Assets\Scripts\Core\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\Health.cs" />
      <Compile Include="Assets\Scripts\Input\InputReader.cs" />
@@ -67,8 +72,9 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <Folder Include="Assets\TextMesh Pro\Sprites" />
+     <Folder Include="Assets\Scripts\UI" />
      <Folder Include="Assets\TextMesh Pro\Resources\Sprite Assets" />
-     <Folder Include="Assets\Prefab\Projectiles" />
+     <Folder Include="Assets\Prefabs\Projectiles" />
      <Folder Include="Assets\Settings" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <Folder Include="Assets\Scripts\Core\Player" />
@@ -77,15 +83,18 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <Folder Include="Assets\TextMesh Pro\Resources" />
      <Folder Include="Assets\Scripts\Core\Combat" />
+     <Folder Include="Assets\Scripts\Networking" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <Folder Include="Assets\Settings\Scenes" />
      <Folder Include="Assets\Art" />
      <Folder Include="Assets\TextMesh Pro" />
-     <Folder Include="Assets\Prefab" />
+     <Folder Include="Assets\Prefabs" />
      <Folder Include="Assets\Scripts\Input" />
+     <Folder Include="Assets\Prefabs\Terrain\Rocks\Individual" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <Folder Include="Assets\Prefabs\Terrain\Walls\Individual" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <Folder Include="Assets\Scripts" />
@@ -95,20 +104,26 @@
      <Folder Include="Assets\TextMesh Pro\Shaders" />
      <Folder Include="Assets\TextMesh Pro\Resources\Style Sheets" />
      <Folder Include="Assets\TextMesh Pro\Fonts" />
+     <Folder Include="Assets\Prefabs\Terrain\Walls\Collections" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <Folder Include="Assets\Input" />
+     <Folder Include="Assets\Prefabs\Terrain\Walls" />
      <Folder Include="Assets\Scripts\Core" />
      <Folder Include="Assets\Scripts\Core\Coins" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <Folder Include="Assets\Scripts\Utils" />
+     <Folder Include="Assets\Prefabs\Terrain\Rocks\Collections" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <Folder Include="Assets\Scripts\Networking\Client" />
      <Folder Include="Assets\TextMesh Pro\Documentation" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-     <Folder Include="Assets\Prefab\Coins" />
+     <Folder Include="Assets\Prefabs\Coins" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
+     <Folder Include="Assets\Prefabs\Terrain" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <Folder Include="Assets\Prefabs\Terrain\Rocks" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.0f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
