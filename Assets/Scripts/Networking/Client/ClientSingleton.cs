@@ -5,8 +5,6 @@ public class ClientSingleton : MonoBehaviour{
 
     private static ClientSingleton instance;
 
-    public ClientGameManager GameManager{ get; private set; }
-
     public static ClientSingleton Instance{
         get{
             if (instance != null) return instance;
@@ -18,6 +16,8 @@ public class ClientSingleton : MonoBehaviour{
             return instance;
         }
     }
+
+    public ClientGameManager GameManager{ get; private set; }
 
     private void Start(){
         DontDestroyOnLoad(gameObject);
