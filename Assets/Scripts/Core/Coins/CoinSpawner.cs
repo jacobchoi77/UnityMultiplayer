@@ -8,7 +8,6 @@ public class CoinSpawner : NetworkBehaviour{
     [SerializeField] private int coinValue = 10;
     [SerializeField] private Vector2 xSpawnRange;
     [SerializeField] private Vector2 ySpawnRange;
-
     [SerializeField] private LayerMask layerMask;
 
     private float coinRadius;
