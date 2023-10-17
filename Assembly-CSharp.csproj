@@ -55,15 +55,20 @@
      <Compile Include="Assets\Scripts\Core\Combat\DealDamageOnContact.cs" />
      <Compile Include="Assets\Scripts\UI\NameSelector.cs" />
      <Compile Include="Assets\Scripts\Utils\DestroySelfOnContact.cs" />
+     <Compile Include="Assets\Scripts\Core\Player\PlayerNameDisplay.cs" />
      <Compile Include="Assets\Scripts\Core\Player\ProjectileLauncher.cs" />
      <Compile Include="Assets\Scripts\Networking\Server\NetworkServer.cs" />
      <Compile Include="Assets\Scripts\Utils\Lifetime.cs" />
      <Compile Include="Assets\Scripts\UI\LobbiesList.cs" />
+     <Compile Include="Assets\Scripts\Core\SpawnPoint.cs" />
+     <Compile Include="Assets\Scripts\Core\Combat\RespawnHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\ApplicationController.cs" />
      <Compile Include="Assets\Scripts\Utils\SpawnOnDestroy.cs" />
      <Compile Include="Assets\Scripts\Core\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Networking\Shared\UserData.cs" />
      <Compile Include="Assets\Scripts\Networking\Client\AuthenticationWrapper.cs" />
+     <Compile Include="Assets\Scripts\Networking\Client\NetworkClient.cs" />
+     <Compile Include="Assets\Scripts\Core\Player\TankPlayer.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\Health.cs" />
      <Compile Include="Assets\Scripts\UI\LobbyItem.cs" />
      <Compile Include="Assets\Scripts\Input\InputReader.cs" />
@@ -950,14 +955,14 @@
      <Reference Include="Unity.Services.Matchmaker">
      <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.Services.Matchmaker.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Services.Lobbies">
+     <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.Services.Lobbies.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Mathematics">
      <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Common.Editor">
      <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Lobbies">
-     <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.Services.Lobbies.dll</HintPath>
      </Reference>
      <Reference Include="Unity.RenderPipelines.Universal.Shaders">
      <HintPath>C:\unity\udemy\Unity Multiplayer\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>

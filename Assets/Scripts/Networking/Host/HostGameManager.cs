@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
@@ -13,18 +14,19 @@ using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HostGameManager{
+public class HostGameManager : IDisposable{
 
     private Allocation allocation;
     private string joinCode;
-    private const int MaxConnections = 20;
-    private const string GameSceneName = "Game";
+    private const int MAX_CONNECTIONS = 20;
+    private const string GAME_SCENE_NAME = "Game";
     private string lobbyId;
-    private NetworkServer networkServer;
+
+    public NetworkServer NetworkServer{ get; private set; }
 
     public async Task StartHostAsync(){
         try{
-            allocation = await Relay.Instance.CreateAllocationAsync(MaxConnections);
+            allocation = await Relay.Instance.CreateAllocationAsync(MAX_CONNECTIONS);
         }
         catch (Exception e){
             Debug.Log(e);
@@ -49,7 +51,7 @@ public class HostGameManager{
                 }
             };
             var playerName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Unknown");
-            var lobby = await Lobbies.Instance.CreateLobbyAsync($"{playerName}'s Lobby", MaxConnections, lobbyOptions);
+            var lobby = await Lobbies.Instance.CreateLobbyAsync($"{playerName}'s Lobby", MAX_CONNECTIONS, lobbyOptions);
             lobbyId = lobby.Id;
             HostSingleton.Instance.StartCoroutine(HeartbeatLobby(15));
         }
@@ -57,15 +59,16 @@ public class HostGameManager{
             Debug.Log(e);
             return;
         }
-        networkServer = new NetworkServer(NetworkManager.Singleton);
+        NetworkServer = new NetworkServer(NetworkManager.Singleton);
         var userData = new UserData{
-            userName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Missing Name")
+            userName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Missing Name"),
+            userAuthId = AuthenticationService.Instance.PlayerId
         };
         var payload = JsonUtility.ToJson(userData);
         var payloadBytes = Encoding.UTF8.GetBytes(payload);
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(GAME_SCENE_NAME, LoadSceneMode.Single);
     }
 
     private IEnumerator HeartbeatLobby(float waitTimeSeconds){
@@ -74,5 +77,21 @@ public class HostGameManager{
             Lobbies.Instance.SendHeartbeatPingAsync(lobbyId);
             yield return delay;
         }
+    }
+
+    public async void Dispose(){
+        if (HostSingleton.Instance != null)
+            HostSingleton.Instance.StopCoroutine(nameof(HeartbeatLobby));
+        if (!string.IsNullOrEmpty(lobbyId)){
+            try{
+                await Lobbies.Instance.DeleteLobbyAsync(lobbyId);
+            }
+            catch (LobbyServiceException e){
+                Debug.Log(e);
+            }
+            lobbyId = string.Empty;
+        }
+
+        NetworkServer?.Dispose();
     }
 }
