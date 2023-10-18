@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Networking\Client\ClientSingleton.cs" />
+     <Compile Include="Assets\Scripts\UI\Leaderboard\Leaderboard.cs" />
      <Compile Include="Assets\Scripts\ConnectionButtons.cs" />
      <Compile Include="Assets\Scripts\TestScript.cs" />
      <Compile Include="Assets\Scripts\Networking\Client\ClientGameManager.cs" />
+     <Compile Include="Assets\Scripts\UI\Leaderboard\LeaderboardEntityDisplay.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Utils\ClientNetworkTransform.cs" />
      <Compile Include="Assets\Scripts\Core\Coins\CoinSpawner.cs" />
@@ -58,8 +60,9 @@
      <Compile Include="Assets\Scripts\Core\Player\PlayerNameDisplay.cs" />
      <Compile Include="Assets\Scripts\Core\Player\ProjectileLauncher.cs" />
      <Compile Include="Assets\Scripts\Networking\Server\NetworkServer.cs" />
+     <Compile Include="Assets\Scripts\UI\Leaderboard\LeaderboardEntityState.cs" />
      <Compile Include="Assets\Scripts\Utils\Lifetime.cs" />
-     <Compile Include="Assets\Scripts\UI\LobbiesList.cs" />
+     <Compile Include="Assets\Scripts\UI\Lobby\LobbyItem.cs" />
      <Compile Include="Assets\Scripts\Core\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\RespawnHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\ApplicationController.cs" />
@@ -67,10 +70,10 @@
      <Compile Include="Assets\Scripts\Core\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Networking\Shared\UserData.cs" />
      <Compile Include="Assets\Scripts\Networking\Client\AuthenticationWrapper.cs" />
+     <Compile Include="Assets\Scripts\UI\Lobby\LobbiesList.cs" />
      <Compile Include="Assets\Scripts\Networking\Client\NetworkClient.cs" />
      <Compile Include="Assets\Scripts\Core\Player\TankPlayer.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\Health.cs" />
-     <Compile Include="Assets\Scripts\UI\LobbyItem.cs" />
      <Compile Include="Assets\Scripts\Input\InputReader.cs" />
      <Compile Include="Assets\Scripts\Core\Player\PlayerAiming.cs" />
      <Compile Include="Assets\Scripts\Input\Controls.cs" />
@@ -100,6 +103,7 @@
      <Folder Include="Assets\Scripts\Core\Combat" />
      <Folder Include="Assets\Scripts\Networking\Server" />
      <Folder Include="Assets\Scripts\Networking" />
+     <Folder Include="Assets\Scripts\UI\Lobby" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <Folder Include="Assets\Settings\Scenes" />
      <Folder Include="Assets\Art" />
@@ -131,10 +135,13 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <Folder Include="Assets\Scripts\Utils" />
      <Folder Include="Assets\Prefabs\Terrain\Rocks\Collections" />
+     <Folder Include="Assets\Scripts\UI\Leaderboard" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+     <Folder Include="Assets\Prefabs\UI\Lobby" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <Folder Include="Assets\Scripts\Networking\Client" />
+     <Folder Include="Assets\Prefabs\UI\Leaderboard" />
      <Folder Include="Assets\TextMesh Pro\Documentation" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <Folder Include="Assets\Prefabs\Coins" />
