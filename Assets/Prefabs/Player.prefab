@@ -527,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1566237789834851543}
   <Health>k__BackingField: {fileID: 8933371974189839374}
+  <Wallet>k__BackingField: {fileID: 6049368263207010058}
   ownerPriority: 15
   PlayerName:
     m_InternalValue:
@@ -642,6 +643,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c0a5083e5944641b698028b62a3089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 8933371974189839374}
+  coinPrefab: {fileID: 5094713429721821433, guid: f933f076b3b853646a9cff32a86081bf, type: 3}
+  coinSpread: 3
+  bountyPercentage: 50
+  bountyCoinCount: 10
+  minBountyCoinValue: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
   totalCoins:
     m_InternalValue: 0
 --- !u!1 &4255412261506867560

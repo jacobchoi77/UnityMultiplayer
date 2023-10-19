@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Networking\Client\ClientSingleton.cs" />
+     <Compile Include="Assets\Scripts\Core\Combat\HealingZone.cs" />
      <Compile Include="Assets\Scripts\UI\Leaderboard\Leaderboard.cs" />
      <Compile Include="Assets\Scripts\ConnectionButtons.cs" />
      <Compile Include="Assets\Scripts\TestScript.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\UI\Leaderboard\LeaderboardEntityState.cs" />
      <Compile Include="Assets\Scripts\Utils\Lifetime.cs" />
      <Compile Include="Assets\Scripts\UI\Lobby\LobbyItem.cs" />
+     <Compile Include="Assets\Scripts\Core\Coins\BountyCoin.cs" />
      <Compile Include="Assets\Scripts\Core\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\Core\Combat\RespawnHandler.cs" />
      <Compile Include="Assets\Scripts\Networking\ApplicationController.cs" />
