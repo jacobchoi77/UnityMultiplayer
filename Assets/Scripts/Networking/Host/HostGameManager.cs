@@ -50,7 +50,7 @@ public class HostGameManager : IDisposable{
                     "JoinCode", new DataObject(visibility: DataObject.VisibilityOptions.Member, value: joinCode)
                 }
             };
-            var playerName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Unknown");
+            var playerName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Unknown");
             var lobby = await Lobbies.Instance.CreateLobbyAsync($"{playerName}'s Lobby", MAX_CONNECTIONS, lobbyOptions);
             lobbyId = lobby.Id;
             HostSingleton.Instance.StartCoroutine(HeartbeatLobby(15));
@@ -61,13 +61,14 @@ public class HostGameManager : IDisposable{
         }
         NetworkServer = new NetworkServer(NetworkManager.Singleton);
         var userData = new UserData{
-            userName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Missing Name"),
+            userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
             userAuthId = AuthenticationService.Instance.PlayerId
         };
         var payload = JsonUtility.ToJson(userData);
         var payloadBytes = Encoding.UTF8.GetBytes(payload);
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         NetworkManager.Singleton.StartHost();
+        NetworkServer.OnClientLeft += HandleClientLeft;
         NetworkManager.Singleton.SceneManager.LoadScene(GAME_SCENE_NAME, LoadSceneMode.Single);
     }
 
@@ -79,7 +80,11 @@ public class HostGameManager : IDisposable{
         }
     }
 
-    public async void Dispose(){
+    public void Dispose(){
+        Shutdown();
+    }
+
+    public async void Shutdown(){
         if (HostSingleton.Instance != null)
             HostSingleton.Instance.StopCoroutine(nameof(HeartbeatLobby));
         if (!string.IsNullOrEmpty(lobbyId)){
@@ -91,7 +96,16 @@ public class HostGameManager : IDisposable{
             }
             lobbyId = string.Empty;
         }
-
+        NetworkServer.OnClientLeft -= HandleClientLeft;
         NetworkServer?.Dispose();
+    }
+
+    private async void HandleClientLeft(string authId){
+        try{
+            await LobbyService.Instance.RemovePlayerAsync(lobbyId, authId);
+        }
+        catch (LobbyServiceException e){
+            Debug.Log(e);
+        }
     }
 }

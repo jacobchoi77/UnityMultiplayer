@@ -109,7 +109,7 @@ public class Leaderboard : NetworkBehaviour{
     }
 
     private void HandleCoinsChanged(ulong clientId, int newCoins){
-        for (int i = 0; i < leaderboardEntities.Count; i++){
+        for (var i = 0; i < leaderboardEntities.Count; i++){
             if (leaderboardEntities[i].ClientId != clientId) continue;
             leaderboardEntities[i] = new LeaderboardEntityState{
                 ClientId = leaderboardEntities[i].ClientId,

@@ -21,10 +21,7 @@ public class ClientGameManager : IDisposable{
         await UnityServices.InitializeAsync();
         networkClient = new NetworkClient(NetworkManager.Singleton);
         var authState = await AuthenticationWrapper.DoAuth();
-        if (authState == AuthState.Authenticated){
-            return true;
-        }
-        return false;
+        return authState == AuthState.Authenticated;
     }
 
     public void GoToMenu(){
@@ -44,13 +41,17 @@ public class ClientGameManager : IDisposable{
         var relayServerData = new RelayServerData(allocation, "dtls");
         transport.SetRelayServerData(relayServerData);
         var userData = new UserData{
-            userName = PlayerPrefs.GetString(NameSelector.PLAYER_NAME_KEY, "Missing Name"),
+            userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
             userAuthId = AuthenticationService.Instance.PlayerId
         };
         var payload = JsonUtility.ToJson(userData);
         var payloadBytes = Encoding.UTF8.GetBytes(payload);
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         NetworkManager.Singleton.StartClient();
+    }
+
+    public void Disconnect(){
+        networkClient?.Disconnect();
     }
 
     public void Dispose(){

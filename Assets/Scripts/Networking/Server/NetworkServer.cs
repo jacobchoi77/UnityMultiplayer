@@ -9,7 +9,7 @@ public class NetworkServer : IDisposable{
     private readonly NetworkManager networkManager;
     private readonly Dictionary<ulong, string> clientIdToAuth = new Dictionary<ulong, string>();
     private readonly Dictionary<string, UserData> authIdToUserData = new Dictionary<string, UserData>();
-
+    public Action<string> OnClientLeft;
 
     public NetworkServer(NetworkManager networkManager){
         this.networkManager = networkManager;
@@ -22,9 +22,10 @@ public class NetworkServer : IDisposable{
     }
 
     private void OnClientDisconnect(ulong clientId){
-        if (clientIdToAuth.TryGetValue(clientId, out string authId)){
+        if (clientIdToAuth.TryGetValue(clientId, out var authId)){
             clientIdToAuth.Remove(clientId);
             authIdToUserData.Remove(authId);
+            OnClientLeft?.Invoke(authId);
         }
     }
 

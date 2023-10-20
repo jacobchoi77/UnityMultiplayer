@@ -7,6 +7,7 @@ using UnityEngine;
 public class TankPlayer : NetworkBehaviour{
     [Header("References")]
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private SpriteRenderer minimapIconRenderer;
 
     [field: SerializeField] public Health Health{ get; private set; }
 
@@ -14,6 +15,7 @@ public class TankPlayer : NetworkBehaviour{
 
     [Header("Settings")]
     [SerializeField] private int ownerPriority = 15;
+    [SerializeField] private Color ownerColor;
 
     public static event Action<TankPlayer> OnPlayerSpawned;
 
@@ -29,6 +31,7 @@ public class TankPlayer : NetworkBehaviour{
         }
         if (IsOwner){
             virtualCamera.Priority = ownerPriority;
+            minimapIconRenderer.color = ownerColor;
         }
     }
 
